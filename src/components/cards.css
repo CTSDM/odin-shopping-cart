@@ -1,0 +1,10 @@
+.card {
+  width: 300px;
+  display: grid;
+  align-items: center;
+  border: 2px solid blue;
+}
+
+.card img {
+  justify-self: center;
+}
