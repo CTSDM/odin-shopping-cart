@@ -6,6 +6,7 @@ import "./shop.css";
 // we fetch the data inside the Shop
 import { useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
+import { increaseProductCount } from "../products";
 
 function Shop() {
     const [products, setProducts] = useOutletContext();
@@ -14,6 +15,7 @@ function Shop() {
         const productsUpdate = products.slice();
         productsUpdate[index].count = productsUpdate[index].count + quantity;
         setProducts(productsUpdate);
+        increaseProductCount(products[index].id, quantity);
     }
 
     useEffect(() => {

@@ -19,7 +19,6 @@ function Card({ item, handlerUpdateProducts, index }) {
                 press to increase 1
             </button>
             <InputNumberItem
-                productId={item.id}
                 increaseSelfProductCount={handlerUpdateProducts}
                 index={index}
             />
