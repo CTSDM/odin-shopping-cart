@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
+import CardCheckout from "../components/CardCheckout";
 
-function Cart({ updating }) {
-    const [itemNumber, setItemNumber] = useState(0);
-    useEffect(() => {
-        if (updating === true) setItemNumber(setItemNumber + 1);
-    }, [updating]);
-
-    return <div>Cart{itemNumber}</div>;
+function Cart() {
+    const [products] = useOutletContext();
+    return (
+        <>
+            {products.map((product) =>
+                product.count ? (
+                    <CardCheckout key={product.id} item={product} />
+                ) : null,
+            )}
+        </>
+    );
 }
 
 export default Cart;
