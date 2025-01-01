@@ -1,0 +1,38 @@
+.card {
+  width: 300px;
+  height: 500px;
+  display: flex;
+  border: 2px solid blue;
+  flex-direction: column;
+  justify-content: space-between;
+  font-size: 1.2rem;
+}
+
+.image-container {
+  height: 300px;
+  display: flex;
+  place-content: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1rem;
+}
+
+.price {
+  font-size: 1.5 rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  align-self: center;
+}
+
+.card>button {
+  align-self: center;
+}

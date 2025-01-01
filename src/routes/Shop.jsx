@@ -1,6 +1,6 @@
 import Card from "../components/Card";
 import { updateProducts } from "../products";
-import "./shop.css";
+import styles from "./Shop.module.css";
 // For the sake of using fetch every time we mount this component
 // even though we are fetching the same data that won't change
 // we fetch the data inside the Shop
@@ -47,7 +47,7 @@ function Shop() {
 
     return products.length > 0 ? (
         <>
-            <div className="cards-container">
+            <div className={styles["cards-container"]}>
                 {products.map((product, index) => (
                     <Card
                         item={product}
