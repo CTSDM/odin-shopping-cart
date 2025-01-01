@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import NavigationBar from "../components/NavigationBar.jsx";
-import { deleteProducts, getProducts } from "../products.js";
+import { deleteProducts, getProducts, updateProducts } from "../products.js";
 
 export default function Root() {
     const [products, setProducts] = useState([]);
@@ -29,10 +29,25 @@ export default function Root() {
         };
     }, []);
 
+    // every time we update products we also update the local storage
+    useEffect(() => {
+        updateProducts(products);
+    }, [products]);
+
+    function handleCartUpdate(id, type) {
+        const productsCopy = products.slice();
+        const productToModify = productsCopy.find((prod) => prod.id === id);
+        if (type === "add") ++productToModify.count;
+        else if (type === "minus") --productToModify.count;
+        else if (type === false) productToModify.count = 0;
+        else throw new Error("type not valid in handleCartUpdate");
+        setProducts(productsCopy);
+    }
+
     return (
         <>
             <NavigationBar totalItems={cartCount} />
-            <Outlet context={[products, setProducts]} />
+            <Outlet context={[products, setProducts, handleCartUpdate]} />
             <button type="button" onClick={deleteProducts}>
                 Delete localforage data
             </button>

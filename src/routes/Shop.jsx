@@ -1,5 +1,4 @@
 import Card from "../components/Card";
-import { updateProducts } from "../products";
 import styles from "./Shop.module.css";
 // For the sake of using fetch every time we mount this component
 // even though we are fetching the same data that won't change
@@ -31,7 +30,6 @@ function Shop() {
                     );
                     response = await response.json();
                     setProducts(response);
-                    updateProducts(response);
                 }
             } catch (err) {
                 if (err.name !== "AbortError") {

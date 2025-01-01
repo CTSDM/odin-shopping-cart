@@ -1,6 +1,12 @@
 import styles from "./CardCheckout.module.css";
+import InputCheckout from "./InputCheckout";
 
-function CardCheckout({ item }) {
+function CardCheckout({ item, handleUpdate }) {
+    function handleUpdateCurrying(id) {
+        return function (type) {
+            handleUpdate(id, type);
+        };
+    }
     return (
         <div className={styles["card-checkout"]}>
             <div className={styles.title}>{item.title}</div>
@@ -13,6 +19,10 @@ function CardCheckout({ item }) {
                 />
             </div>
             <div>Items: {item.count}</div>
+            <InputCheckout
+                count={item.count}
+                handleUpdate={handleUpdateCurrying(item.id)}
+            />
         </div>
     );
 }
