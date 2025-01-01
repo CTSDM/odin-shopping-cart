@@ -31,8 +31,11 @@ function Shop() {
                             signal: controller.signal,
                         },
                     );
-                    response = await response.json();
-                    setProducts(response);
+                    const fetchedProducts = await response.json();
+                    fetchedProducts.forEach((product) => {
+                        product.count = 0;
+                    });
+                    setProducts(fetchedProducts);
                 }
             } catch (err) {
                 if (err.name !== "AbortError") {

@@ -8,9 +8,6 @@ export async function getProducts() {
 }
 
 export async function updateProducts(products) {
-    products.forEach((product) => {
-        if (!product.count) product.count = 0;
-    });
     await localforage.setItem("products", products);
 }
 
