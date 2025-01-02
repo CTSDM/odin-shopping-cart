@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-function InputNumberItem({ increaseSelfProductCount, index }) {
+function InputNumberItem({ increaseSelfProductCount, id }) {
     const [value, setValue] = useState(0);
 
     const handleSubmit = (e) => {
         e.preventDefault();
         const inputValue = +e.target.querySelector("input").value;
-        increaseSelfProductCount(index, inputValue);
+        increaseSelfProductCount(id, inputValue);
     };
 
     const handleOnChange = (e) => {

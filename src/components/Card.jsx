@@ -1,7 +1,7 @@
 import styles from "./Card.module.css";
 import InputNumberItem from "./InputNumberItem";
 
-function Card({ item, handlerUpdateProducts, index }) {
+function Card({ item, handlerUpdateProducts }) {
     return (
         <div className={styles.card} role="button">
             <div className={styles["image-container"]}>
@@ -14,13 +14,13 @@ function Card({ item, handlerUpdateProducts, index }) {
             <div>Items added: {item.count}</div>
             <button
                 type="button"
-                onClick={() => handlerUpdateProducts(index, 1)}
+                onClick={() => handlerUpdateProducts(item.id, 1)}
             >
                 Add 1
             </button>
             <InputNumberItem
+                id={item.id}
                 increaseSelfProductCount={handlerUpdateProducts}
-                index={index}
             />
         </div>
     );

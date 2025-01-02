@@ -14,11 +14,20 @@ function Shop() {
     const [products, setProducts] = useOutletContext();
     const [valueSelect, setValueSelect] = useState("popularity");
 
-    function handlerUpdateProducts(index, quantity) {
+    function handlerUpdateProducts(id, quantity) {
         const productsUpdate = products.slice();
-        productsUpdate[index].count = productsUpdate[index].count + quantity;
+        const productToUpdate = productsUpdate.filter(
+            (product) => product.id === id,
+        )[0];
+        productToUpdate.count = productToUpdate.count + quantity;
+        productsUpdate.filter((product, index) => {
+            if (product.id === id) {
+                productsUpdate[index] = productToUpdate;
+                return true;
+            }
+        });
         setProducts(productsUpdate);
-        increaseProductCount(products[index].id, quantity);
+        increaseProductCount(id, quantity);
     }
 
     useEffect(() => {
