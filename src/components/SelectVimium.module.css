@@ -1,0 +1,39 @@
+.hidden {
+  display: none;
+}
+
+.select {
+  border: 2px black solid;
+  position: relative;
+}
+
+.select {
+  background: grey;
+}
+
+.container-options {
+  border: 2px black solid;
+  background: #CCCCCC;
+  height: fit-content;
+  position: absolute;
+  top: 1rem;
+}
+
+.select:hover {
+  background: white;
+}
+
+.active {
+  display: block;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1rem;
+  padding: 2px 0;
+}
+
+.mockup {
+  width: fit-content;
+}
+
+.active:hover {
+  background: red;
+}
