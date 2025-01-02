@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import NavigationBar from "../components/NavigationBar.jsx";
 import { deleteProducts, getProducts, updateProducts } from "../products.js";
+import styles from "./Root.module.css";
 
 export default function Root() {
     const [products, setProducts] = useState([]);
@@ -45,12 +46,12 @@ export default function Root() {
     }
 
     return (
-        <>
+        <div className={styles.container}>
             <NavigationBar totalItems={cartCount} />
             <Outlet context={[products, setProducts, handleCartUpdate]} />
             <button type="button" onClick={deleteProducts}>
                 Delete localforage data
             </button>
-        </>
+        </div>
     );
 }

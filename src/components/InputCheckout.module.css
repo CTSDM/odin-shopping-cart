@@ -1,0 +1,14 @@
+.input {
+  display: flex;
+  justify-items: center;
+  justify-self: center;
+  align-items: center;
+  font-size: 1.1rem;
+  gap: 5px;
+}
+
+.button {
+  font-size: 1.1rem;
+  width: 2rem;
+  margin: auto;
+}

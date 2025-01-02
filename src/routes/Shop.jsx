@@ -9,7 +9,7 @@ import SelectVimium from "../components/SelectVimium";
 // For the sake of using fetch every time we mount this component
 // even though we are fetching the same data that won't change
 // we fetch the data inside the Shop
-//
+
 function Shop() {
     const [products, setProducts] = useOutletContext();
     const [valueSelect, setValueSelect] = useState("popularity");
@@ -53,8 +53,8 @@ function Shop() {
     const productsSorted = sortProducts(products, valueSelect);
 
     return productsSorted.length > 0 ? (
-        <>
-            <div>
+        <div>
+            <div className={styles.select}>
                 <SelectVimium
                     params={[
                         {
@@ -72,19 +72,18 @@ function Shop() {
                     ]}
                     handleChange={setValueSelect}
                 />
-                <div></div>
-                <div className={styles["cards-container"]}>
-                    {productsSorted.map((product, index) => (
-                        <Card
-                            item={product}
-                            key={product.id}
-                            index={index}
-                            handlerUpdateProducts={handlerUpdateProducts}
-                        />
-                    ))}
-                </div>
             </div>
-        </>
+            <div className={styles["cards-container"]}>
+                {productsSorted.map((product, index) => (
+                    <Card
+                        item={product}
+                        key={product.id}
+                        index={index}
+                        handlerUpdateProducts={handlerUpdateProducts}
+                    />
+                ))}
+            </div>
+        </div>
     ) : (
         <div>Loading</div>
     );

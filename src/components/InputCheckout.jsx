@@ -1,6 +1,12 @@
+import styles from "./InputCheckout.module.css";
+
 function InputCheckout({ count, handleUpdate }) {
     const buttonTemplateFn = (text, params) => (
-        <button type="button" onClick={() => handleUpdate(params)}>
+        <button
+            type="button"
+            className={styles.button}
+            onClick={() => handleUpdate(params)}
+        >
             {text}
         </button>
     );
@@ -9,11 +15,11 @@ function InputCheckout({ count, handleUpdate }) {
     const buttonPlus = buttonTemplateFn("+1", "add");
 
     return (
-        <>
+        <div className={styles.input}>
             {count === 0 ? null : count === 1 ? buttonDelete : buttonMinus}
             <div>{count}</div>
             {buttonPlus}
-        </>
+        </div>
     );
 }
 

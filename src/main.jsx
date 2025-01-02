@@ -6,6 +6,7 @@ import "./index.css";
 import Shop from "./routes/Shop.jsx";
 import Cart from "./routes/Cart.jsx";
 import ErrorComponent from "./components/ErrorComponent.jsx";
+import Home from "./routes/Home.jsx";
 
 const router = createBrowserRouter([
     {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
             {
                 errorElement: <ErrorComponent />,
                 children: [
+                    { index: true, element: <Home /> },
                     { path: "/shop", element: <Shop /> },
                     { path: "/cart", element: <Cart /> },
                 ],

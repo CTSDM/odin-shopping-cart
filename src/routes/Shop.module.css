@@ -2,6 +2,13 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  gap: 30px;
+  gap: 25px;
   margin-top: 30px;
+}
+
+.select {
+  padding-right: 5vw;
+  margin-left: auto;
+  width: fit-content;
+  margin-top: 20px;
 }
