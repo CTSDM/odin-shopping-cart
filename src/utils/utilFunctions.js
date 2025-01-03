@@ -36,4 +36,18 @@ function getCartCount(products) {
     return cartCount;
 }
 
-export { sortProducts, getCartCount };
+function getAccumulatedPrice(arrData) {
+    // we receive and array like the following
+    // The order is very important, as we only convert to integer the price arr
+    // The price is assumed to only have two decimals
+    // [ [price array],  [count array ]
+    // we just need to accumulate the result of the product of every entry
+
+    let priceInteger = 0;
+    for (let i = 0; i < arrData[0].length; ++i) {
+        priceInteger += arrData[0][i] * 100 * arrData[1][i];
+    }
+    return priceInteger / 100;
+}
+
+export { sortProducts, getCartCount, getAccumulatedPrice };

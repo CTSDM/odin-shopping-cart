@@ -1,0 +1,41 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-right: auto;
+  width: 250px;
+  position: sticky;
+  top: 100px;
+  z-index: 1;
+  height: fit-content;
+  border: 5px solid lightseagreen;
+  border-radius: 3px;
+  padding: 10px;
+}
+
+.container span.content {
+  margin-left: auto;
+}
+
+.container>div {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.items {
+  font-size: 1.3rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.items>span.content {
+  color: grey;
+}
+
+.price {
+  font-size: 1.2rem;
+}
+
+.price>span.content {
+  font-weight: 900;
+  font-style: italic;
+}
