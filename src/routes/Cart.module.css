@@ -1,7 +1,5 @@
 .container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 20px;
-  justify-content: space-around;
-  flex-grow: 1;
+  justify-content: start;
 }

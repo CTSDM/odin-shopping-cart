@@ -16,9 +16,9 @@ function InputCheckout({ count, handleUpdate }) {
 
     return (
         <div className={styles.input}>
-            {count === 0 ? null : count === 1 ? buttonDelete : buttonMinus}
-            <div>{count}</div>
+            {count === 0 ? null : count === 1 ? null : buttonMinus}
             {buttonPlus}
+            {buttonDelete}
         </div>
     );
 }

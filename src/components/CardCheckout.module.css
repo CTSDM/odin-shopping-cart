@@ -1,9 +1,10 @@
 .card-checkout {
-  width: 300px;
+  width: 500px;
   border: 2px solid black;
   border-radius: 2px;
   display: grid;
-  padding: 20px 10px;
+  padding: 10px 10px;
+  height: fit-content;
 }
 
 .title {

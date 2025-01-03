@@ -1,0 +1,22 @@
+.container {
+  justify-self: start;
+  align-self: start;
+}
+
+.disappointment {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 800;
+  font-size: 1.5rem;
+  padding: 4px;
+}
+
+.disappointment>span {
+  position: relative;
+  bottom: 4px;
+}
+
+.suggestion {
+  padding-left: 10px;
+  font-size: 1.2rem;
+  color: darkblue;
+}

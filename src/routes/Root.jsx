@@ -6,13 +6,12 @@ import { Outlet } from "react-router-dom";
 import NavigationBar from "../components/NavigationBar.jsx";
 import { deleteProducts, getProducts, updateProducts } from "../products.js";
 import styles from "./Root.module.css";
+import { getCartCount } from "../utils/utilFunctions.js";
 
 export default function Root() {
     const [products, setProducts] = useState([]);
 
-    const cartCount = products.length
-        ? products.reduce((sum, product) => sum + product.count, 0)
-        : 0;
+    const cartCount = getCartCount(products);
 
     useEffect(() => {
         let active = true;
@@ -49,7 +48,11 @@ export default function Root() {
         <div className={styles.container}>
             <NavigationBar totalItems={cartCount} />
             <Outlet context={[products, setProducts, handleCartUpdate]} />
-            <button type="button" onClick={deleteProducts}>
+            <button
+                type="button"
+                style={{ ["margin-top"]: "auto" }}
+                onClick={deleteProducts}
+            >
                 Delete localforage data
             </button>
         </div>

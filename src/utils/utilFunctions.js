@@ -29,4 +29,11 @@ function sortProducts(arr, type) {
     return arrCopy;
 }
 
-export { sortProducts };
+function getCartCount(products) {
+    const cartCount = products.length
+        ? products.reduce((sum, product) => sum + product.count, 0)
+        : 0;
+    return cartCount;
+}
+
+export { sortProducts, getCartCount };

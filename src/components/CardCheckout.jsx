@@ -10,7 +10,6 @@ function CardCheckout({ item, handleUpdate }) {
     return (
         <div className={styles["card-checkout"]}>
             <div className={styles.title}>{item.title}</div>
-            <div className={styles.description}>{item.description}</div>
             <div className={styles["img-container"]}>
                 <img
                     width={"100px"}
