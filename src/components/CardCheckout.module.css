@@ -3,6 +3,7 @@
   border: 2px solid black;
   border-radius: 2px;
   display: grid;
+  gap: 5px;
   padding: 10px 10px;
   height: fit-content;
 }
@@ -17,10 +18,21 @@
 }
 
 .img-container {
-  height: 200px;
   display: grid;
 }
 
 .img-container>img {
   place-self: center;
+  height: 200px;
+}
+
+.container-info {
+  margin: auto;
+  display: flex;
+  width: 100px;
+  gap: 30px;
+}
+
+.container-info>span.content {
+  margin-left: auto;
 }
