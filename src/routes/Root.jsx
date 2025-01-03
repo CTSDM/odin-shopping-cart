@@ -5,8 +5,8 @@ import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import NavigationBar from "../components/NavigationBar.jsx";
 import { deleteProducts, getProducts, updateProducts } from "../products.js";
-import styles from "./Root.module.css";
 import { getCartCount } from "../utils/utilFunctions.js";
+import styles from "./Root.module.css";
 
 export default function Root() {
     const [products, setProducts] = useState([]);
@@ -50,7 +50,7 @@ export default function Root() {
             <Outlet context={[products, setProducts, handleCartUpdate]} />
             <button
                 type="button"
-                style={{ ["margin-top"]: "auto" }}
+                style={{ marginTop: "auto" }}
                 onClick={deleteProducts}
             >
                 Delete localforage data

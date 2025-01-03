@@ -2,11 +2,11 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/Root.jsx";
-import "./index.css";
 import Shop from "./routes/Shop.jsx";
 import Cart from "./routes/Cart.jsx";
 import ErrorComponent from "./components/ErrorComponent.jsx";
 import Home from "./routes/Home.jsx";
+import "./index.css";
 
 const router = createBrowserRouter([
     {
