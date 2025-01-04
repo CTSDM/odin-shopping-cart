@@ -25,7 +25,7 @@ function sortProducts(arr, type, selectProperties) {
 
         case namesExpected[1]:
             arrCopy.sort(
-                (prodA, prodB) => prodA.rating.rate - prodB.rating.rate,
+                (prodA, prodB) => -prodA.rating.rate + prodB.rating.rate,
             );
             break;
 
