@@ -1,8 +1,9 @@
 import { Fragment } from "react";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
+import { elementsNavBar, maxItemsCart } from "../../config/config.js";
 import styles from "./NavigationBar.module.css";
 import deltaSigma from "../../public/delta-sigma.svg";
-import { elementsNavBar, maxItemsCart } from "../../config/config.js";
 
 function NavigationBar({ totalItems }) {
     return (
@@ -35,5 +36,9 @@ function NavigationBar({ totalItems }) {
         </div>
     );
 }
+
+NavigationBar.propTypes = {
+    totalItems: PropTypes.number,
+};
 
 export default NavigationBar;

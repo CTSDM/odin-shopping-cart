@@ -1,5 +1,6 @@
 import InputCheckout from "./InputCheckout";
 import styles from "./CardCheckout.module.css";
+import PropTypes from "prop-types";
 
 function CardCheckout({ item, handleUpdate }) {
     function handleUpdateCurrying(id) {
@@ -7,6 +8,7 @@ function CardCheckout({ item, handleUpdate }) {
             handleUpdate(id, type);
         };
     }
+
     return (
         <div className={styles["card-checkout"]}>
             <div className={styles.title}>{item.title}</div>
@@ -28,5 +30,19 @@ function CardCheckout({ item, handleUpdate }) {
         </div>
     );
 }
+
+CardCheckout.propTypes = {
+    item: PropTypes.shape({
+        category: PropTypes.string,
+        count: PropTypes.number,
+        description: PropTypes.string,
+        id: PropTypes.number,
+        image: PropTypes.string,
+        price: PropTypes.number,
+        rating: PropTypes.object,
+        title: PropTypes.string,
+    }),
+    handleUpdate: PropTypes.func,
+};
 
 export default CardCheckout;

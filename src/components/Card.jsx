@@ -1,5 +1,6 @@
 import styles from "./Card.module.css";
 import InputNumberItem from "./InputNumberItem";
+import PropTypes from "prop-types";
 
 function Card({ item, handlerUpdateProducts }) {
     return (
@@ -25,5 +26,19 @@ function Card({ item, handlerUpdateProducts }) {
         </div>
     );
 }
+
+Card.propTypes = {
+    item: PropTypes.shape({
+        category: PropTypes.string,
+        count: PropTypes.number,
+        description: PropTypes.string,
+        id: PropTypes.number,
+        image: PropTypes.string,
+        price: PropTypes.number,
+        rating: PropTypes.object,
+        title: PropTypes.string,
+    }),
+    handleUpdate: PropTypes.func,
+};
 
 export default Card;

@@ -5,6 +5,7 @@
 
 import { useEffect } from "react";
 import styles from "./SelectVimium.module.css";
+import PropTypes from "prop-types";
 
 const vimiumButtonClassName = "demo-button";
 const activeStyle = styles.active + " " + vimiumButtonClassName;
@@ -85,6 +86,12 @@ function SelectVimium({ value, nameValues, handleChange }) {
         </div>
     );
 }
+
+SelectVimium.propTypes = {
+    value: PropTypes.string,
+    nameValues: PropTypes.array,
+    handleChange: PropTypes.func,
+};
 
 function getMaxWidthOption(nameValues) {
     const divMockUpContainer = getDivMockup(nameValues);

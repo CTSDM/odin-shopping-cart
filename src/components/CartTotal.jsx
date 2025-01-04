@@ -1,4 +1,5 @@
 import styles from "./CartTotal.module.css";
+import PropTypes from "prop-types";
 
 function CartTotal({ cartCount, totalPrice }) {
     return (
@@ -14,5 +15,10 @@ function CartTotal({ cartCount, totalPrice }) {
         </div>
     );
 }
+
+CartTotal.propTypes = {
+    cartCount: PropTypes.number,
+    totalPrice: PropTypes.number,
+};
 
 export default CartTotal;

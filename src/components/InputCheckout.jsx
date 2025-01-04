@@ -1,4 +1,5 @@
 import styles from "./InputCheckout.module.css";
+import PropTypes from "prop-types";
 
 function InputCheckout({ count, handleUpdate }) {
     const buttonTemplateFn = (text, params) => (
@@ -22,5 +23,10 @@ function InputCheckout({ count, handleUpdate }) {
         </div>
     );
 }
+
+InputCheckout.propTypes = {
+    count: PropTypes.number,
+    handleUpdate: PropTypes.func,
+};
 
 export default InputCheckout;

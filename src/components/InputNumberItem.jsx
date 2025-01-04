@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 
 function InputNumberItem({ increaseSelfProductCount, id }) {
     const [value, setValue] = useState(0);
@@ -28,5 +29,10 @@ function InputNumberItem({ increaseSelfProductCount, id }) {
         </>
     );
 }
+
+InputNumberItem.propTypes = {
+    increaseSelfProductCount: PropTypes.func,
+    id: PropTypes.number,
+};
 
 export default InputNumberItem;
