@@ -11,6 +11,10 @@ function Card({ item, handlerUpdateProducts }) {
             <div className={styles.title} title={item.title}>
                 {item.title}
             </div>
+            <div className={styles.rating}>Rating: {item.rating.rate}</div>
+            <div className={styles.rating}>
+                Purchased {item.rating.count} times.
+            </div>
             <div className={styles.price}>{item.price}$</div>
             <div>Items added: {item.count}</div>
             <button
@@ -38,7 +42,7 @@ Card.propTypes = {
         rating: PropTypes.object,
         title: PropTypes.string,
     }),
-    handleUpdate: PropTypes.func,
+    handlerUpdateProducts: PropTypes.func,
 };
 
 export default Card;
