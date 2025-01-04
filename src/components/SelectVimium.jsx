@@ -1,11 +1,15 @@
-import { useState } from "react";
+// this component is meant to replace the select element
+// it receives two parameters: nameValues and handleChange
+// nameValues is an array containing objects: key: option name, value: option value
+
+import { useState, useEffect } from "react";
 import styles from "./SelectVimium.module.css";
 
 const vimiumButtonClassName = "demo-button";
 const activeStyle = styles.active + " " + vimiumButtonClassName;
 
-function SelectVimium({ params, handleChange }) {
-    const [value, setValue] = useState(Object.values(params[0])[0]);
+function SelectVimium({ nameValues, handleChange }) {
+    const [value, setValue] = useState(Object.values(nameValues[0])[0]);
 
     function handleOnClick(e) {
         const div = e.currentTarget;
@@ -16,21 +20,49 @@ function SelectVimium({ params, handleChange }) {
     }
 
     function handleOnClickSelect() {
-        const optionsContainer = document.querySelector(
-            `div.${styles["container-options"]}`,
-        );
-        if (optionsContainer.classList.contains(`${styles.hidden}`)) {
-            optionsContainer.classList.remove(`${styles.hidden}`);
-        } else optionsContainer.classList.add(`${styles.hidden}`);
+        hideShowOptions(true);
     }
 
-    const maxWidth = getMaxWidthOption(params);
+    function handleOnKeyDown(e) {
+        if (e.target.classList.contains(`${styles.select}`)) {
+            if (e.code === "Escape") {
+                if (!e.currentTarget.classList.contains(`${styles.hidden}`))
+                    hideShowOptions(false);
+            } else if (e.code === "Enter") {
+                hideShowOptions(true);
+            }
+        }
+    }
+
+    function handleOptionEnterKey(e) {
+        if (e.code === "Enter") {
+            handleOnClick(e);
+            hideShowOptions(true);
+        }
+        e.stopPropagation();
+    }
+
+    useEffect(() => {
+        const onClickWindow = (e) => {
+            const divSelect = document.querySelector(`.${styles.select}`);
+            if (divSelect && !divSelect.contains(e.target))
+                hideShowOptions(false);
+        };
+        window.addEventListener("click", onClickWindow);
+
+        return () => {
+            window.removeEventListener("click", onClickWindow);
+        };
+    }, []);
+
+    const maxWidth = getMaxWidthOption(nameValues);
 
     return (
         <div
             className={styles.select}
             style={{ width: `${maxWidth}px` }}
             onClick={handleOnClickSelect}
+            onKeyDown={handleOnKeyDown}
             tabIndex={0}
         >
             <span className={vimiumButtonClassName}>{value}</span>
@@ -38,13 +70,14 @@ function SelectVimium({ params, handleChange }) {
                 className={`${styles["container-options"]} ${styles.hidden}`}
                 style={{ width: `${maxWidth}px` }}
             >
-                {params.map((param) => {
+                {nameValues.map((param) => {
                     return (
                         <div
                             key={Object.keys(param)[0]}
                             data-value={Object.keys(param)[0]}
                             className={activeStyle}
                             onClick={handleOnClick}
+                            onKeyDown={handleOptionEnterKey}
                             tabIndex={0}
                         >
                             {Object.values(param)[0]}
@@ -56,14 +89,14 @@ function SelectVimium({ params, handleChange }) {
     );
 }
 
-function getMaxWidthOption(params) {
-    const divMockUpContainer = getDivMockup(params);
+function getMaxWidthOption(nameValues) {
+    const divMockUpContainer = getDivMockup(nameValues);
     const maxWidth = [...divMockUpContainer.children].reduce((max, div) => {
         return div.clientWidth > max ? div.clientWidth : max;
     }, 0);
 
     removeDivMockUp();
-    return maxWidth + 10;
+    return maxWidth + 20;
 }
 
 function removeDivMockUp() {
@@ -75,16 +108,16 @@ function removeDivMockUp() {
     }
 }
 
-function getDivMockup(params) {
+function getDivMockup(nameValues) {
     const divMockupContainer = document.createElement("div");
 
     divMockupContainer.classList.add("mockup-container");
-    params.forEach((entry) => {
+    nameValues.forEach((entry) => {
         const div = document.createElement("div");
         div.classList.add(styles.active);
         div.classList.add(styles.mockup);
-        // div.style.visibility = "hidden";
-        // div.position = "absolute";
+        div.style.visibility = "hidden";
+        div.position = "absolute";
         div.textContent = Object.values(entry)[0];
         divMockupContainer.appendChild(div);
     });
@@ -93,6 +126,19 @@ function getDivMockup(params) {
     root.appendChild(divMockupContainer);
 
     return divMockupContainer;
+}
+
+function hideShowOptions(action) {
+    // if action is true the the style hidden is toggled
+    // if action is false the style hidden is added
+    const optionsContainer = document.querySelector(
+        `div.${styles["container-options"]}`,
+    );
+    if (action) {
+        optionsContainer.classList.toggle(`${styles.hidden}`);
+    } else {
+        optionsContainer.classList.add(`${styles.hidden}`);
+    }
 }
 
 export default SelectVimium;

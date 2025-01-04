@@ -65,7 +65,7 @@ function Shop() {
         <div>
             <div className={styles.select}>
                 <SelectVimium
-                    params={[
+                    nameValues={[
                         {
                             popularity: "Popularity",
                         },
