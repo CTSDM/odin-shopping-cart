@@ -1,22 +1,19 @@
 // this component is meant to replace the select element
 // it receives two parameters: nameValues and handleChange
-// nameValues is an array containing objects: key: option name, value: option value
+// nameValues is an array containing objects as {name: ..., text: ...}
+// where name is the name of the option and text is the innerText of the option
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styles from "./SelectVimium.module.css";
 
 const vimiumButtonClassName = "demo-button";
 const activeStyle = styles.active + " " + vimiumButtonClassName;
 
-function SelectVimium({ nameValues, handleChange }) {
-    const [value, setValue] = useState(Object.values(nameValues[0])[0]);
-
+function SelectVimium({ value, nameValues, handleChange }) {
     function handleOnClick(e) {
         const div = e.currentTarget;
-        const innerText = div.innerText;
         const optionValue = div.dataset.value;
         handleChange(optionValue);
-        setValue(innerText);
     }
 
     function handleOnClickSelect() {
@@ -73,14 +70,14 @@ function SelectVimium({ nameValues, handleChange }) {
                 {nameValues.map((param) => {
                     return (
                         <div
-                            key={Object.keys(param)[0]}
-                            data-value={Object.keys(param)[0]}
+                            key={param.name}
+                            data-value={param.name}
                             className={activeStyle}
                             onClick={handleOnClick}
                             onKeyDown={handleOptionEnterKey}
                             tabIndex={0}
                         >
-                            {Object.values(param)[0]}
+                            {param.text}
                         </div>
                     );
                 })}
@@ -118,7 +115,7 @@ function getDivMockup(nameValues) {
         div.classList.add(styles.mockup);
         div.style.visibility = "hidden";
         div.position = "absolute";
-        div.textContent = Object.values(entry)[0];
+        div.textContent = entry.text;
         divMockupContainer.appendChild(div);
     });
 

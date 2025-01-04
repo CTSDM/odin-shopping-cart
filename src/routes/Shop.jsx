@@ -3,6 +3,7 @@ import styles from "./Shop.module.css";
 import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { increaseProductCount } from "../products";
+import { selectProperties } from "../../config/config.js";
 import { sortProducts } from "../utils/utilFunctions";
 import SelectVimium from "../components/SelectVimium";
 
@@ -29,6 +30,8 @@ function Shop() {
         setProducts(productsUpdate);
         increaseProductCount(id, quantity);
     }
+
+    const selectText = getSelectText(valueSelect, selectProperties);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -59,27 +62,19 @@ function Shop() {
         };
     }, [products, setProducts]);
 
-    const productsSorted = sortProducts(products, valueSelect);
+    const productsSorted = sortProducts(
+        products,
+        valueSelect,
+        selectProperties,
+    );
 
     return productsSorted.length > 0 ? (
         <div>
             <div className={styles.select}>
                 <SelectVimium
-                    nameValues={[
-                        {
-                            popularity: "Popularity",
-                        },
-                        {
-                            rating: "Rating",
-                        },
-                        {
-                            "high-to-low": "Price (High to Low)",
-                        },
-                        {
-                            "low-to-high": "Price (Low to High)",
-                        },
-                    ]}
+                    nameValues={selectProperties}
                     handleChange={setValueSelect}
+                    value={selectText}
                 />
             </div>
             <div className={styles["cards-container"]}>
@@ -96,6 +91,12 @@ function Shop() {
     ) : (
         <div>Loading</div>
     );
+}
+
+function getSelectText(value, selectProperties) {
+    for (const arrEntry of selectProperties) {
+        if (arrEntry.name === value) return arrEntry.text;
+    }
 }
 
 export default Shop;

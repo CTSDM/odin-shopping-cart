@@ -1,23 +1,39 @@
-function sortProducts(arr, type) {
+function sortProducts(arr, type, selectProperties) {
+    // We expect from selectProperties to have the same variables in the same order
+    // The order inside the switch is very sensible to changes
     const arrCopy = arr.slice();
+    const namesExpected = [
+        "popularity",
+        "rating",
+        "high-to-low",
+        "low-to-high",
+    ];
+
+    for (let i = 0; i < namesExpected.length; ++i) {
+        if (selectProperties[i].name !== namesExpected[i])
+            throw new Error(
+                "The expected config name in selectProperties does not match with the actual values",
+            );
+    }
+
     switch (type) {
-        case "popularity":
+        case namesExpected[0]:
             arrCopy.sort(
                 (prodA, prodB) => -prodA.rating.count + prodB.rating.count,
             );
             break;
 
-        case "rating":
+        case namesExpected[1]:
             arrCopy.sort(
                 (prodA, prodB) => prodA.rating.rate - prodB.rating.rate,
             );
             break;
 
-        case "high-to-low":
+        case namesExpected[2]:
             arrCopy.sort((prodA, prodB) => -prodA.price + prodB.price);
             break;
 
-        case "low-to-high":
+        case namesExpected[3]:
             arrCopy.sort((prodA, prodB) => prodA.price - prodB.price);
             break;
         default:
