@@ -56,14 +56,15 @@ function SelectVimium({ value, nameValues, handleChange }) {
     const maxWidth = getMaxWidthOption(nameValues);
 
     return (
-        <div
+        <button
             className={styles.select}
             style={{ width: `${maxWidth}px` }}
             onClick={handleOnClickSelect}
             onKeyDown={handleOnKeyDown}
+            name={"vimium"}
             tabIndex={0}
         >
-            <span className={vimiumButtonClassName}>{value}</span>
+            {value}
             <div
                 className={`${styles["container-options"]} ${styles.hidden}`}
                 style={{ width: `${maxWidth}px` }}
@@ -83,7 +84,7 @@ function SelectVimium({ value, nameValues, handleChange }) {
                     );
                 })}
             </div>
-        </div>
+        </button>
     );
 }
 
@@ -104,11 +105,10 @@ function getMaxWidthOption(nameValues) {
 }
 
 function removeDivMockUp() {
-    const root = document.querySelector("#root");
     while (true) {
         const divMockup = document.querySelector(".mockup-container");
         if (!divMockup) return;
-        root.removeChild(divMockup);
+        document.body.removeChild(divMockup);
     }
 }
 
@@ -126,8 +126,7 @@ function getDivMockup(nameValues) {
         divMockupContainer.appendChild(div);
     });
 
-    const root = document.querySelector("#root");
-    root.appendChild(divMockupContainer);
+    document.body.appendChild(divMockupContainer);
 
     return divMockupContainer;
 }
