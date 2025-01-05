@@ -1,5 +1,5 @@
-.hidden {
-  display: none;
+.no-show {
+  display: none !important;
 }
 
 .select {

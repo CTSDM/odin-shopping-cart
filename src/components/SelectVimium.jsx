@@ -24,7 +24,7 @@ function SelectVimium({ value, nameValues, handleChange }) {
     function handleOnKeyDown(e) {
         if (e.target.classList.contains(`${styles.select}`)) {
             if (e.code === "Escape") {
-                if (!e.currentTarget.classList.contains(`${styles.hidden}`))
+                if (!e.currentTarget.classList.contains(`${styles["no-show"]}`))
                     hideShowOptions(false);
             } else if (e.code === "Enter") {
                 hideShowOptions(true);
@@ -66,7 +66,7 @@ function SelectVimium({ value, nameValues, handleChange }) {
         >
             {value}
             <div
-                className={`${styles["container-options"]} ${styles.hidden}`}
+                className={`${styles["container-options"]} ${styles["no-show"]}`}
                 style={{ width: `${maxWidth}px` }}
             >
                 {nameValues.map((param) => {
@@ -138,9 +138,9 @@ function hideShowOptions(action) {
         `div.${styles["container-options"]}`,
     );
     if (action) {
-        optionsContainer.classList.toggle(`${styles.hidden}`);
+        optionsContainer.classList.toggle(`${styles["no-show"]}`);
     } else {
-        optionsContainer.classList.add(`${styles.hidden}`);
+        optionsContainer.classList.add(`${styles["no-show"]}`);
     }
 }
 
