@@ -7,7 +7,7 @@ import deltaSigma from "../../public/delta-sigma.svg";
 
 function NavigationBar({ totalItems }) {
     return (
-        <div className={styles.bar}>
+        <div role={"nav-container"} className={styles.bar}>
             <div>
                 <NavLink to={"/"}>
                     <img src={deltaSigma} alt="company logo" />
@@ -22,7 +22,10 @@ function NavigationBar({ totalItems }) {
                             </NavLink>
                             {value === "cart" ? (
                                 <>
-                                    <span className={styles["total-items"]}>
+                                    <span
+                                        role="cart-count"
+                                        className={styles["total-items"]}
+                                    >
                                         {totalItems > maxItemsCart
                                             ? "+" + maxItemsCart
                                             : totalItems}
