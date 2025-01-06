@@ -68,6 +68,7 @@ function SelectVimium({ value, nameValues, handleChange }) {
             <div
                 className={`${styles["container-options"]} ${styles["no-show"]}`}
                 style={{ width: `${maxWidth}px` }}
+                role="container-options"
             >
                 {nameValues.map((param) => {
                     return (
@@ -77,6 +78,7 @@ function SelectVimium({ value, nameValues, handleChange }) {
                             className={activeStyle}
                             onClick={handleOnClick}
                             onKeyDown={handleOptionEnterKey}
+                            role="option"
                             tabIndex={0}
                         >
                             {param.text}

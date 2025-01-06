@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { vi, describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SelectVimium from "../src/components/SelectVimium";
@@ -39,7 +39,21 @@ describe("SelectVimium component ", () => {
         expect(selectVimium).toBeInTheDocument();
     });
 
-    it("should render the option list when the button is clicked", async () => {
+    it("should have a container div with a class containing 'no-show'", async () => {
+        render(
+            <SelectVimium
+                value={"test"}
+                nameValues={arrOptions}
+                handleChange={() => {}}
+            />,
+        );
+
+        const containerOptions = screen.queryByRole("container-options");
+        const classString = [...containerOptions.classList].join(" ");
+        expect(classString).toMatch(/no-show/);
+    });
+
+    it("should have a container div without a class name 'no-show'  when the button is clicked", async () => {
         const user = userEvent.setup();
 
         render(
@@ -51,11 +65,10 @@ describe("SelectVimium component ", () => {
         );
 
         const selectVimium = screen.getByRole("button");
+        const containerOptions = screen.queryByRole("container-options");
         await user.click(selectVimium);
-
-        arrOptions.forEach((options) => {
-            expect(selectVimium).toBeInTheDocument(options.text);
-        });
+        const classString = [...containerOptions.classList].join(" ");
+        expect(classString).not.toMatch(/no-show/);
     });
 
     it("should change the selected option to the clicked one after rendering the option list", async () => {
@@ -70,15 +83,13 @@ describe("SelectVimium component ", () => {
         );
 
         const selectVimium = screen.getByRole("button");
-
-        // this gives an HTML collection which is not iterable using forEach
-        const containerOptions = [...selectVimium.querySelectorAll("div")];
+        const containerOptions = screen.queryAllByRole("container-options");
         // we have to iterate the options and make click on each one and test if it really changes
         for (let i = 0; i < containerOptions.length; ++i) {
             const optionDiv = containerOptions[i];
             await user.click(selectVimium);
             await user.click(optionDiv);
-            expect(selectVimium).toHaveTextContent(optionDiv.textContent);
+            expect(selectVimium.textContent).toMatch(optionDiv.textContent);
         }
     });
 
@@ -94,9 +105,9 @@ describe("SelectVimium component ", () => {
         );
         const selectVimium = screen.getByRole("button");
         await user.click(selectVimium);
-        const containerOptions = [...selectVimium.querySelectorAll("div")];
-        for (let i = 0; i < containerOptions.length; ++i) {
-            const optionDiv = containerOptions[i];
+        const options = screen.queryAllByRole("option");
+        for (let i = 0; i < options.length; ++i) {
+            const optionDiv = options[i];
             await user.click(selectVimium);
             await user.click(optionDiv);
         }
