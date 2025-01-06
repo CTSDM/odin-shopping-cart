@@ -39,7 +39,10 @@ Card.propTypes = {
         id: PropTypes.number,
         image: PropTypes.string,
         price: PropTypes.number,
-        rating: PropTypes.object,
+        rating: PropTypes.shape({
+            count: PropTypes.number,
+            rate: PropTypes.number,
+        }),
         title: PropTypes.string,
     }),
     handlerUpdateProducts: PropTypes.func,
