@@ -17,7 +17,7 @@ function InputNumberItem({ increaseSelfProductCount, id }) {
 
     return (
         <>
-            <form method="post" onSubmit={handleSubmit}>
+            <form aria-label={"form"} method="post" onSubmit={handleSubmit}>
                 <input
                     type="number"
                     name="quantity"
