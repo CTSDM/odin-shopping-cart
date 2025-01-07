@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import PropTypes from "prop-types";
 import { elementsNavBar, maxItemsCart } from "../../config/config.js";
 import styles from "./NavigationBar.module.css";
-import deltaSigma from "../../public/delta-sigma.svg";
+import deltaSigma from "../assets/delta-sigma.svg";
 
 function NavigationBar({ totalItems }) {
     return (
