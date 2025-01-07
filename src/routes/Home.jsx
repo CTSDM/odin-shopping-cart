@@ -1,3 +1,4 @@
+import { deleteProducts } from "../products";
 import styles from "./Home.module.css";
 
 function Home() {
@@ -12,7 +13,15 @@ function Home() {
                     price on the market.
                 </h3>
             </div>
-            <div></div>
+            <div>
+                <button
+                    type="button"
+                    className={styles["local-data"]}
+                    onClick={deleteProducts}
+                >
+                    Delete local data
+                </button>
+            </div>
         </div>
     );
 }
