@@ -7,3 +7,6 @@
     - react-router-dom: Handle the routing to achieve SPA.
     - testing-library: Extensive test for components.
 - Styles are applied using css modules so that are no conflict between class names.
+
+# Live
+https://odin-shopping-cart-4il.pages.dev
