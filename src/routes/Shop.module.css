@@ -11,4 +11,11 @@
   margin-left: auto;
   width: fit-content;
   margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.container-vimium {
+  display: flex;
+  gap: 5px;
 }

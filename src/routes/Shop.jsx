@@ -4,7 +4,11 @@ import { useState, useEffect } from "react";
 import { useOutletContext } from "react-router-dom";
 import { increaseProductCount } from "../products";
 import { selectProperties } from "../../config/config.js";
-import { sortProducts } from "../utils/utilFunctions";
+import {
+    sortProducts,
+    getCategories,
+    shortListByCategory,
+} from "../utils/utilFunctions";
 import SelectVimium from "../components/SelectVimium";
 
 // For the sake of using fetch every time we mount this component
@@ -13,7 +17,8 @@ import SelectVimium from "../components/SelectVimium";
 
 function Shop() {
     const [products, setProducts] = useOutletContext();
-    const [valueSelect, setValueSelect] = useState("popularity");
+    const [orderSelect, setOrderSelect] = useState("popularity");
+    const [category, setCategory] = useState("all");
 
     function handlerUpdateProducts(id, quantity) {
         const productsUpdate = products.slice();
@@ -30,8 +35,6 @@ function Shop() {
         setProducts(productsUpdate);
         increaseProductCount(id, quantity);
     }
-
-    const selectText = getSelectText(valueSelect, selectProperties);
 
     useEffect(() => {
         const controller = new AbortController();
@@ -62,23 +65,38 @@ function Shop() {
         };
     }, [products, setProducts]);
 
-    const productsSorted = sortProducts(
-        products,
-        valueSelect,
-        selectProperties,
-    );
+    // we first shortlist the products according to the category
+    // and then we sort them
 
-    return productsSorted.length > 0 ? (
+    const categoriesObj = getCategories(products);
+    const productsToBeShown = shortListByCategory(products, category);
+    sortProducts(productsToBeShown, orderSelect, selectProperties);
+
+    const selectText = getSelectText(orderSelect, selectProperties);
+    const categoryText = getSelectText(category, categoriesObj);
+
+    return productsToBeShown.length > 0 ? (
         <div>
             <div className={styles.select}>
-                <SelectVimium
-                    nameValues={selectProperties}
-                    handleChange={setValueSelect}
-                    value={selectText}
-                />
+                <div className={styles["container-vimium"]}>
+                    <span>Category</span>
+                    <SelectVimium
+                        nameValues={categoriesObj}
+                        handleChange={setCategory}
+                        value={categoryText}
+                    />
+                </div>
+                <div className={styles["container-vimium"]}>
+                    <span>Order by</span>
+                    <SelectVimium
+                        nameValues={selectProperties}
+                        handleChange={setOrderSelect}
+                        value={selectText}
+                    />
+                </div>
             </div>
             <div className={styles["cards-container"]}>
-                {productsSorted.map((product, index) => (
+                {productsToBeShown.map((product, index) => (
                     <Card
                         item={product}
                         key={product.id}

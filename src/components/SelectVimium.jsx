@@ -17,18 +17,17 @@ function SelectVimium({ value, nameValues, handleChange }) {
         handleChange(optionValue);
     }
 
-    function handleOnClickSelect() {
-        hideShowOptions(true);
+    function handleOnClickSelect(e) {
+        const element = e.currentTarget;
+        hideShowOptions(element, true);
     }
 
     function handleOnKeyDown(e) {
-        if (e.target.classList.contains(`${styles.select}`)) {
-            if (e.code === "Escape") {
-                if (!e.currentTarget.classList.contains(`${styles["no-show"]}`))
-                    hideShowOptions(false);
-            } else if (e.code === "Enter") {
-                hideShowOptions(true);
-            }
+        if (e.code === "Escape") {
+            if (!e.currentTarget.classList.contains(`${styles["no-show"]}`))
+                hideShowOptions(e.currentTarget, false);
+        } else if (e.code === "Enter") {
+            hideShowOptions(true);
         }
     }
 
@@ -42,9 +41,13 @@ function SelectVimium({ value, nameValues, handleChange }) {
 
     useEffect(() => {
         const onClickWindow = (e) => {
-            const divSelect = document.querySelector(`.${styles.select}`);
-            if (divSelect && !divSelect.contains(e.target))
-                hideShowOptions(false);
+            // From all the possible SelectVimium elements we only search for the one containing the element current target
+            const divSelects = document.querySelectorAll(`.${styles.select}`);
+            for (let i = 0; i < divSelects.length; ++i) {
+                if (!divSelects[i].contains(e.target)) {
+                    hideShowOptions(divSelects[i], false);
+                } else continue;
+            }
         };
         window.addEventListener("click", onClickWindow);
 
@@ -133,10 +136,10 @@ function getDivMockup(nameValues) {
     return divMockupContainer;
 }
 
-function hideShowOptions(action) {
+function hideShowOptions(parentElement, action) {
     // if action is true the the style hidden is toggled
     // if action is false the style hidden is added
-    const optionsContainer = document.querySelector(
+    const optionsContainer = parentElement.querySelector(
         `div.${styles["container-options"]}`,
     );
     if (action) {
